@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universidad del Futuro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container" id="login-container">
+        <video autoplay muted loop id="background-video">
+            <source src="../Video de WhatsApp 2025-02-25 a las 14.22.42_84aa0efa.mp4" type="video/mp4">
+            Tu navegador no soporta video.
+        </video>
+        <div class="login-box">
+            <h1>Universidad del Futuro</h1>
+            <h2>Iniciar Sesión</h2>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Usuario" required>
+                <input type="password" id="password" placeholder="Contraseña" required>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container" id="dashboard" style="display: none;">
+        <header>
+            <h1>Bienvenido(a) a Universidad del Futuro</h1>
+            <button id="logout-btn">Cerrar Sesión</button>
+            <select id="theme-selector" onchange="changeTheme()">
+                <option value="dark">Oscuro</option>
+                <option value="light">Claro</option>
+            </select>
+        </header>
+        <div class="menu">
+            <button onclick="showSection('inscripcion')">Formulario de Inscripción</button>
+            <button onclick="showSection('becas')">Formulario de Becas</button>
+            <button onclick="showSection('historia')">Historia de la Universidad</button>
+            <button onclick="showSection('compromiso')">Carta de Compromiso</button>
+            <button onclick="showSection('futbol')">Inscripción al Fútbol</button>
+            <button onclick="showSection('horas-sociales')">Horas Sociales</button>
+        </div>
+
+        <div id="inscripcion" class="section" style="display: none;">
+            <h2>Formulario de Inscripción</h2>
+            <form class="course-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre del Alumno</label>
+                        <input type="text" id="nombre" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="segundo-nombre">Segundo Nombre</label>
+                        <input type="text" id="segundo-nombre" placeholder="Segundo Nombre" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" id="apellido" placeholder="Apellido" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha-nacimiento">Fecha de Nacimiento</label>
+                        <input type="date" id="fecha-nacimiento" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="genero">Género</label>
+                        <select id="genero" required>
+                            <option value="">Please Select</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Número de Teléfono</label>
+                        <input type="tel" id="telefono" placeholder="Número de Teléfono" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" placeholder="Dirección" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad</label>
+                        <select id="ciudad" required>
+                            <option value="">Please Select</option>
+                            <option value="Acajutla">Acajutla</option>
+                            <option value="Apopa">Apopa</option>
+                            <option value="Antiguo Cuscatlán">Antiguo Cuscatlán</option>
+                            <option value="Ciudad Delgado">Ciudad Delgado</option>
+                            <option value="Cojutepeque">Cojutepeque</option>
+                            <option value="Cuscatancingo">Cuscatancingo</option>
+                            <option value="Ilopango">Ilopango</option>
+                            <option value="Jiquilisco">Jiquilisco</option>
+                            <option value="La Unión">La Unión</option>
+                            <option value="Mejicanos">Mejicanos</option>
+                            <option value="Metapán">Metapán</option>
+                            <option value="San Marcos">San Marcos</option>
+                            <option value="San Martín">San Martín</option>
+                            <option value="San Miguel">San Miguel</option>
+                            <option value="San Salvador">San Salvador</option>
+                            <option value="San Vicente">San Vicente</option>
+                            <option value="Santa Ana">Santa Ana</option>
+                            <option value="Santa Tecla">Santa Tecla</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="codigo-postal">Código Postal</label>
+                        <input type="text" id="codigo-postal" placeholder="Código Postal" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="form-group full-width">
+                    <label>¿Ha realizado otros cursos anteriormente?</label>
+                    <label><input type="radio" name="cursos-anteriores" value="si" required onclick="showCursoField()"> Sí</label>
+                    <label><input type="radio" name="cursos-anteriores" value="no" onclick="hideCursoField()"> No</label>
+                </div>
+                <div class="form-group full-width" id="curso-field" style="display: none;">
+                    <label for="curso-anterior">¿Cuál fue el curso que tuvo?</label>
+                    <input type="text" id="curso-anterior" placeholder="Especifica el curso" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="comentarios">Comentarios Adicionales</label>
+                    <textarea id="comentarios" placeholder="Comentarios Adicionales"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Enviar</button>
+            </form>
+        </div>
+
+        <div id="becas" class="section" style="display: none;">
+            <h2>Formulario de Becas</h2>
+            <form class="course-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="telefono">Número de Teléfono</label>
+                        <input type="tel" id="telefono" placeholder="Número de Teléfono" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" placeholder="Dirección" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tipo-beca">Tipo de Beca</label>
+                        <select id="tipo-beca" required>
+                            <option value="">Please Select</option>
+                            <option value="academica">Académica</option>
+                            <option value="deportiva">Deportiva</option>
+                            <option value="cultural">Cultural</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ingresos">Ingresos Mensuales Familiares</label>
+                        <input type="number" id="ingresos" placeholder="Ingresos Mensuales Familiares" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tutor">Nombre del Tutor</label>
+                        <input type="text" id="tutor" placeholder="Nombre del Tutor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="semestre">Semestre Actual</label>
+                        <select id="semestre" required>
+                            <option value="">Please Select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="motivo">Motivo de la Solicitud</label>
+                        <input type="text" id="motivo" placeholder="Motivo de la Solicitud" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comprobante">Comprobante de Ingresos</label>
+                        <input type="file" id="comprobante" accept=".pdf" placeholder="Comprobante de Ingresos" required>
+                    </div>
+                </div>
+                <div class="form-group full-width">
+                    <label for="dependientes">Número de Dependientes</label>
+                    <input type="number" id="dependientes" placeholder="Número de Dependientes" required>
+                </div>
+                <button type="submit" class="submit-btn">Solicitar</button>
+            </form>
+        </div>
+
+        <div id="historia" class="section" style="display: none;">
+            <h2>Historia de la Universidad</h2>
+            <div class="history-box">
+                <p>Fundada en 1990, la Universidad del Futuro ha sido un pilar en la educación superior, comprometida con la excelencia académica y la innovación.</p>
+            </div>
+            <div class="history-box">
+                <p>En sus primeros años, la universidad comenzó con apenas 200 estudiantes y un pequeño campus, pero su visión era clara: transformar la educación mediante tecnología y humanismo.</p>
+            </div>
+            <div class="history-box">
+                <p>En 1995, se inauguró el primer laboratorio de investigación tecnológica, marcando un hito en la región y atrayendo a académicos de renombre internacional.</p>
+            </div>
+            <div class="history-box">
+                <p>Para el año 2000, la Universidad del Futuro expandió sus instalaciones con la construcción del Edificio de Ciencias, un espacio dedicado a fomentar la curiosidad científica.</p>
+            </div>
+            <div class="history-box">
+                <p>En 2005, se lanzó el programa de becas "Futuro Brillante", que ha beneficiado a miles de estudiantes con talento pero con recursos limitados.</p>
+            </div>
+            <div class="history-box">
+                <p>El año 2010 trajo consigo la modalidad virtual, adaptándose a las necesidades de un mundo cada vez más conectado y permitiendo el acceso a la educación desde cualquier lugar.</p>
+            </div>
+            <div class="history-box">
+                <p>En 2015, la universidad recibió el reconocimiento como "Institución Innovadora del Año" por su enfoque en sostenibilidad y responsabilidad social.</p>
+            </div>
+            <div class="history-box">
+                <p>En 2020, durante la pandemia global, la Universidad del Futuro fue pionera en implementar clases híbridas, garantizando la continuidad educativa sin sacrificar calidad.</p>
+            </div>
+            <div class="history-box">
+                <p>Hoy, en 2025, la universidad cuenta con más de 15,000 estudiantes, múltiples campus y alianzas internacionales que refuerzan su prestigio global.</p>
+            </div>
+            <div class="history-box">
+                <p>Nuestra misión sigue siendo formar líderes del mañana, combinando tradición con una visión progresista para enfrentar los retos del futuro.</p>
+            </div>
+        </div>
+
+        <div id="compromiso" class="section" style="display: none;">
+            <h2>Carta de Compromiso</h2>
+            <div class="commitment-letter">
+                <h3>Carta de Compromiso</h3>
+                <p><strong>Universidad Nacional de El Salvador</strong><br>
+                San Salvador, El Salvador<br>
+                [Fecha: 03 de marzo de 2025]</p>
+
+                <p>Yo, [Nombre del Estudiante], estudiante inscrito/a en la Universidad Nacional de El Salvador, con matrícula [Matrícula o Número de Identificación], y cursando el programa de [Nombre del Programa Académico], me comprometo formalmente a cumplir con las siguientes obligaciones y responsabilidades durante mi proceso formativo en la institución:</p>
+
+                <ul>
+                    <li>Assistir puntualmente a todas las actividades académicas programadas, incluyendo clases, talleres, seminarios y evaluaciones, respetando los horarios establecidos por la universidad y los docentes.</li>
+                    <li>Realizar y entregar oportunamente todas las tareas, proyectos, ensayos y exámenes requeridos para cada asignatura, garantizando un esfuerzo académico consistente y de calidad.</li>
+                    <li>Cumplir con el reglamento estudiantil de la Universidad Nacional de El Salvador, incluyendo las normativas sobre conducta, uso de instalaciones, y respeto hacia el personal académico y administrativo.</li>
+                    <li>Participar activamente en las actividades de formación integral, tales como proyectos comunitarios, eventos culturales y deportivos, promoviendo el desarrollo personal y social en línea con los valores universitarios.</li>
+                    <li>Utilizar de manera responsable los recursos tecnológicos y bibliotecarios de la universidad, respetando las políticas de propiedad intelectual y acceso a plataformas digitales.</li>
+                    <li>Mantener una comunicación fluida y respetuosa con docentes, tutores y compañeros, colaborando en un ambiente de respeto mutuo y aprendizaje colectivo.</li>
+                    <li>Comprometerme a alcanzar los objetivos académicos establecidos para mi programa, asumiendo la responsabilidad de mi formación y su impacto en mi desarrollo profesional y en la sociedad salvadoreña.</li>
+                </ul>
+
+                <p>Declaro que, consciente de la importancia de mi formación académica y profesional, asumo este compromiso con la Universidad Nacional de El Salvador y con la comunidad que represento, comprometiéndome a cumplirlo en su totalidad para contribuir al prestigio y excelencia de la institución.</p>
+
+                <p>Atentamente,</p>
+                <p>[Nombre del Estudiante]<br>
+                [Matrícula o Número de Identificación]<br>
+                [Firma del Estudiante]</p>
+
+                <p><em>Nota: Esta carta debe ser firmada, escaneada y presentada en formato PDF al coordinador académico correspondiente para su validación y registro en la Universidad Nacional de El Salvador.</em></p>
+            </div>
+            <button onclick="printCommitmentLetter()" class="submit-btn">Imprimir o Descargar Carta</button>
+        </div>
+
+        <div id="futbol" class="section" style="display: none;">
+            <h2>Formulario de Inscripción para Jugar Fútbol</h2>
+            <form class="course-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="posicion">Posición Preferida</label>
+                        <select id="posicion" required>
+                            <option value="">Please Select</option>
+                            <option value="portero">Portero</option>
+                            <option value="defensa">Defensa</option>
+                            <option value="mediocampista">Mediocampista</option>
+                            <option value="delantero">Delantero</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edad">Edad</label>
+                        <input type="number" id="edad" placeholder="Edad" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="equipo-anterior">Equipo Anterior</label>
+                        <input type="text" id="equipo-anterior" placeholder="Equipo Anterior" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="experiencia">Nivel de Experiencia</label>
+                        <select id="experiencia" required>
+                            <option value="">Please Select</option>
+                            <option value="principiante">Principiante</option>
+                            <option value="intermedio">Intermedio</option>
+                            <option value="avanzado">Avanzado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="talla">Talla de Uniforme</label>
+                        <select id="talla" required>
+                            <option value="">Please Select</option>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                            <option value="3XL">3XL</option>
+                            <option value="4XL">4XL</option>
+                            <option value="5XL">5XL</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="disponibilidad">Disponibilidad</label>
+                        <select id="disponibilidad" required>
+                            <option value="">Please Select</option>
+                            <option value="mañana">Mañana</option>
+                            <option value="tarde">Tarde</option>
+                            <option value="ambos">Ambos</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group full-width">
+                    <label for="condicion">Condición Física Actual</label>
+                    <input type="text" id="condicion" placeholder="Condición Física Actual" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="certificado">Certificado Médico (PDF)</label>
+                    <input type="file" id="certificado" accept=".pdf" placeholder="Certificado Médico" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="motivo">Motivo para Unirse al Equipo</label>
+                    <textarea id="motivo" placeholder="Motivo para Unirse al Equipo" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Inscribirse</button>
+            </form>
+        </div>
+
+        <div id="horas-sociales" class="section" style="display: none;">
+            <h2>Formulario para Realizar Horas Sociales</h2>
+            <form class="course-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="horas">Horas Sociales Requeridas</label>
+                        <input type="number" id="horas" placeholder="Horas Sociales Requeridas" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo-servicio">Tipo de Servicio Social</label>
+                        <select id="tipo-servicio" required>
+                            <option value="">Please Select</option>
+                            <option value="comunitario">Comunitario</option>
+                            <option value="educativo">Educativo</option>
+                            <option value="ambiental">Ambiental</option>
+                            <option value="salud">Salud</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="institucion">Institución o Proyecto</label>
+                        <input type="text" id="institucion" placeholder="Institución o Proyecto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="responsable">Nombre del Responsable</label>
+                        <input type="text" id="responsable" placeholder="Nombre del Responsable" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="telefono-responsable">Teléfono del Responsable</label>
+                        <input type="tel" id="telefono-responsable" placeholder="Teléfono del Responsable" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha-inicio">Fecha de Inicio</label>
+                        <input type="date" id="fecha-inicio" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fecha-fin">Fecha de Fin</label>
+                        <input type="date" id="fecha-fin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="carrera">Carrera</label>
+                        <select id="carrera" required>
+                            <option value="">Please Select</option>
+                            <option value="ing">Ingeniería</option>
+                            <option value="med">Medicina</option>
+                            <option value="der">Derecho</option>
+                            <option value="adm">Administración</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group full-width">
+                    <label for="descripcion">Descripción del Servicio (actividades a realizar)</label>
+                    <textarea id="descripcion" placeholder="Descripción del Servicio" required></textarea>
+                </div>
+                <div class="form-group full-width">
+                    <label for="carta">Carta de Intención (PDF)</label>
+                    <input type="file" id="carta" accept=".pdf" placeholder="Carta de Intención" required>
+                </div>
+                <button type="submit" class="submit-btn">Enviar Solicitud</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
